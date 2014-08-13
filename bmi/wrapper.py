@@ -19,7 +19,8 @@ import pandas
 from bmi.api import IBmi
 
 logger = logging.getLogger(__name__)
-
+logging.basicConfig()
+logger.setLevel(logging.DEBUG)
 from ctypes import (
     # Types
     c_double, c_int, c_char_p, c_bool, c_char, c_float, c_void_p,
@@ -576,6 +577,7 @@ class BMIWrapper(IBmi):
                                   flags='F')
         else:
             arraytype = self.make_compound_ctype(name)
+        logger.debug("requesting variable %s of type %s", name, arraytype)
         # Create a pointer to the array type
         data = arraytype()
         # The functions get_var_type/_shape/_rank are already wrapped with

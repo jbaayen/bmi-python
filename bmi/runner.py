@@ -45,7 +45,9 @@ def colorlogs(format="short"):
         handler = RainbowLoggingHandler(sys.stderr,
                                         color_funcName=('black', 'gray', True))
         handler.setFormatter(formatter)
+        logging.root.handlers = []
         logger.addHandler(handler)
+
     except ImportError:
         # rainbow logger not found, that's ok
         pass
@@ -74,7 +76,6 @@ def main():
     arguments = docopt.docopt(__doc__, version=__version__)
     colorlogs()
     # Read input file file
-
 
     wrapper = BMIWrapper(
         engine=arguments['<engine>'],
